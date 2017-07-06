@@ -2,6 +2,10 @@ class JobsController < ApplicationController
 before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 def show
 @job=Job.find(params[:id])
+if @job.is_hidden
+  flash[:warning] ="這個工作不許看 羞羞>////<"
+redirect_to root_path
+  end
 end
 
 def index
